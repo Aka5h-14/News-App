@@ -6,7 +6,7 @@ export class NewsItem extends Component {
     return (
       <div>
         <div className="relative max-w-sm mt-5 mx-1 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-        <span className="z-10 bg-blue-200 text-lg font-semibold text-blue-800 text-center p-0.5 leading-none rounded-full px-2 dark:bg-blue-900 dark:text-blue-200 absolute -translate-y-1/2 translate-x-[14%] left-auto top-0 right-0">{source}</span>
+        <span className="z-10 bg-red-500 text-lg font-semibold text-white text-center p-0.5 leading-none rounded-full px-2  absolute -translate-y-1/2 translate-x-[14%] left-auto top-0 right-0">{source}</span>
           <a href={url}>
             <div className="h-[16.3rem]">
               <img
