@@ -83,7 +83,7 @@ export class NavBar extends Component {
 
                   <div
                     id="dropdownNavbar"
-                    className="z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-40 dark:bg-gray-700 dark:divide-gray-600"
+                    className="z-20 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-40 dark:bg-gray-700 dark:divide-gray-600"
                   >
                     <ul
                       className="py-2 text-sm text-white dark:text-gray-400"
@@ -92,7 +92,7 @@ export class NavBar extends Component {
                       <li>
                         <Link
                           to="/business"
-                          className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                          className=" block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                         >
                           Business
                         </Link>
@@ -166,7 +166,7 @@ export class NavBar extends Component {
 
                   <div
                     id="dropdownNavbar2"
-                    className="z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-40 dark:bg-gray-700 dark:divide-gray-600"
+                    className="z-20 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-40 dark:bg-gray-700 dark:divide-gray-600"
                   >
                     <ul
                       className="py-2 text-sm text-white dark:text-gray-400"
