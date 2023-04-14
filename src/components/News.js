@@ -1,105 +1,94 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import NewsItem from "./NewsItem";
 import Spinner from "./Spinner";
 import PropTypes from "prop-types";
 import InfiniteScroll from "react-infinite-scroll-component";
 
-export class News extends Component {
-  static defaultProps = {
-    pageSize: 9,
-    category: "sports",
-  };
+const News = (props) => {
 
-  static propTypes = {
-    pageSize: PropTypes.number.isRequired,
-    country: PropTypes.string,
-    category: PropTypes.string,
-  };
+  const [articles, setArticles] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [page, setPage] = useState(1);
+  const [totalResults, setTotalResults] = useState(0);
 
-  constructor() {
-    super();
-    this.state = {
-      articles: [],
-      loading: false,
-      page: 1,
-      totalResults: 0,
-    };
-  }
+  useEffect(() => {
+    updateNews();
+  }, []);
 
-  componentDidMount() {
-    this.updateNews();
-  }
-
-  updateNews = async () => {
-    this.props.progress(20)
-    const url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=${this.props.apiKey}&page=${this.state.page}&pagesize=${this.props.pageSize}`;
+  const updateNews = async () => {
+    props.progress(20);
+    setLoading(true);
+    const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.apiKey}&page=${page}&pagesize=${props.pageSize}`;
     let data = await fetch(url);
-    this.props.progress(40)
+    props.progress(40);
     let parsedData = await data.json();
-    this.props.progress(60)
-    this.setState({
-      articles: parsedData.articles,
-      totalResults: parsedData.totalResults,
-    })
-    this.props.progress(100)
+    props.progress(60);
+    setArticles(parsedData.articles);
+    setTotalResults(parsedData.totalResults);
+    setLoading(false);
+    props.progress(100);
+  };
+
+  const fetchMoreData = async () => {
+    setPage(page + 1);
   }
 
-  fetchMoreData = async () => {
-    this.setState(
-      {
-        page: this.state.page + 1,
-      },
-      async () => {
-        console.log(this.state.page);
-        const url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=${this.props.apiKey}&page=${this.state.page}&pagesize=${this.props.pageSize}`;
-        let data = await fetch(url);
-        let parsedData = await data.json();
-        this.setState(
-          {
-            articles: this.state.articles.concat(parsedData.articles),
-            totalResults: parsedData.totalResults,
-          }
-          , async () => {
-          console.log(this.state.articles.length);
-          console.log(this.state.totalResults);
-          console.log(this.state.articles.length !== this.state.totalResults)})
-        })
-      }
+  const waitToFetch = async () => {
+      const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.apiKey}&page=${page}&pagesize=${props.pageSize}`;
+      let data = await fetch(url);
+      let parsedData = await data.json();
+      setArticles(articles.concat(parsedData.articles));
+      setTotalResults(parsedData.totalResults);
+    }
 
-  render() {
-    return (
-      <>
-        <InfiniteScroll
-          dataLength={this.state.articles.length}
-          next={this.fetchMoreData}
-          hasMore={this.state.articles.length !== this.state.totalResults}
-          loader={<Spinner />}
-          endMessage={
-            <p style={{ textAlign: "center" }}>
-              <b>Yay! You have seen it all</b>
-            </p>
-          }
-        >
-          <div className="flex flex-wrap justify-around my-5">
-            {this.state.articles.map((element, index) => {
-              return (
-                <NewsItem
-                  key={index}
-                  title={element.title}
-                  description={element.description}
-                  imageUrl={element.urlToImage}
-                  url={element.url}
-                  author={element.author}
-                  date={element.publishedAt}
-                  source={element.source.name}
-                />
-              );
-            })}
-          </div>
-        </InfiniteScroll>
-      </>
-    );
-  }
-}
+    useEffect(() => {
+      waitToFetch();
+    }, [page]);
+  
+  return (
+    <>
+      {loading && <Spinner />}
+      <InfiniteScroll
+        dataLength={articles.length}
+        next={fetchMoreData}
+        hasMore={articles.length !== totalResults}
+        loader={<Spinner />}
+        endMessage={
+          <p style={{ textAlign: "center" }}>
+            <b>Yay! You have seen it all</b>
+          </p>
+        }
+      >
+        <div className="flex flex-wrap justify-around my-5">
+          {articles.map((element, index) => {
+            return (
+              <NewsItem
+                key={index}
+                title={element.title}
+                description={element.description}
+                imageUrl={element.urlToImage}
+                url={element.url}
+                author={element.author}
+                date={element.publishedAt}
+                source={element.source.name}
+              />
+            );
+          })}
+        </div>
+      </InfiniteScroll>
+    </>
+  );
+};
+
+News.defaultProps = {
+  pageSize: 9,
+  category: "sports",
+};
+
+News.propTypes = {
+  pageSize: PropTypes.number.isRequired,
+  country: PropTypes.string,
+  category: PropTypes.string,
+};
 
 export default News;

@@ -1,17 +1,11 @@
-import React, { Component } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 
-export class NavBar extends Component {
- 
-  // props.onCountryChange = (event) => {
-  //   const newCountry = event;
-  //   this.props.onCountryChange(newCountry);
-  // };
+const NavBar = (props) => {
 
-  render() {
     return (
       <>
-        <nav className="bg-white border-gray-200 dark:bg-gray-900 dark:border-gray-700">
+        <nav className="sticky top-0 z-30 bg-white border-gray-200 dark:bg-gray-900 dark:border-gray-700 ">
           <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
             <Link to="/" className="flex items-center">
               <img
@@ -176,7 +170,7 @@ export class NavBar extends Component {
                         
                           to=""
                           className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                          onClick={() => this.props.onCountryChange("in")}
+                          onClick={() => props.onCountryChange("in")}
                         >
                           India
                         
@@ -185,7 +179,7 @@ export class NavBar extends Component {
                         
         
                           className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                          onClick={() => this.props.onCountryChange("us")}
+                          onClick={() => props.onCountryChange("us")}
                         >
                           US
                         
@@ -194,7 +188,7 @@ export class NavBar extends Component {
                         
                           to=""
                           className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                          onClick={() => this.props.onCountryChange("au")}
+                          onClick={() => props.onCountryChange("au")}
                         >
                           Australia
                         
@@ -203,7 +197,7 @@ export class NavBar extends Component {
                         
                           to=""
                           className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                          onClick={() => this.props.onCountryChange("cn")}
+                          onClick={() => props.onCountryChange("cn")}
                         >
                           China
                         
@@ -211,7 +205,7 @@ export class NavBar extends Component {
                       <li
                           to=""
                           className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                          onClick={() => this.props.onCountryChange("gb")}
+                          onClick={() => props.onCountryChange("gb")}
                         >
                           UK
                         
@@ -219,7 +213,7 @@ export class NavBar extends Component {
                       <li
                           to=""
                           className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                          onClick={() => this.props.onCountryChange("ru")}
+                          onClick={() => props.onCountryChange("ru")}
                         >
                           Russia
                         
@@ -252,7 +246,7 @@ export class NavBar extends Component {
         </nav>
       </>
     );
-  }
+  
 }
 
 export default NavBar;

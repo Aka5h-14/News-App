@@ -1,8 +1,8 @@
-import React, { Component } from "react";
+import React from "react";
 
-export class NewsItem extends Component {
-  render() {
-    let { title, description, imageUrl, url ,author , date , source} = this.props;
+const NewsItem = (props) => {
+  
+    let { title, description, imageUrl, url ,author , date , source} = props;
     return (
       <div>
         <div className="relative max-w-sm mt-5 mx-1 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
@@ -49,7 +49,7 @@ export class NewsItem extends Component {
         </div>
       </div>
     );
-  }
+  
 }
 
 export default NewsItem;
