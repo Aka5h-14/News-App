@@ -13,7 +13,7 @@ const News = (props) => {
 
   useEffect(() => {
     updateNews();
-  }, []);
+  }, [,props.country]);
 
   const updateNews = async () => {
     props.progress(20);

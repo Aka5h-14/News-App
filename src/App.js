@@ -25,7 +25,6 @@ const App = () =>{
   const handleCountryChange = (newCountry) => {
     setCountry(newCountry);
   };
-  console.log(country)
 
   return (
     <>
