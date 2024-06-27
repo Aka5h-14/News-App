@@ -1,3 +1,6 @@
+![image](https://github.com/Aka5h-14/News-App/assets/121353237/7a87391e-bc69-4363-b976-7ef77e326f37)
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
